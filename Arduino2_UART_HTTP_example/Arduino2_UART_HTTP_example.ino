@@ -128,7 +128,11 @@ void synchronize_badgeID(){
   Serial.println(response);
   if( statusCode==200){
     if(response != ""){
-      Serial1.print(response);
+      Serial.println("-"+response.substring(0, 10)+"+"); // Badge
+      Serial.println("+"+response.substring(11)+"+"); //Email
+      Serial1.print(response.substring(0, 10));
+    }else{ // case no owner , the second arduino must delete the badge (keep only the default one)
+      Serial1.print("<00000000>"); 
     }
   }
 }

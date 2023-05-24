@@ -23,6 +23,7 @@ char password[] = "oussouss";
 unsigned long CONNECTING_LAST = 0;
   
 //* EmailSender informations 
+// Sender is always oussama4123silem11@gmail.com (to modify)
 EMailSender emailSend("oussama4123silem11@gmail.com", "seniphfgkzibmpje","Intelligent Mailbox");
 String receiver = "oussama4123silem11@gmail.com";
 EMailSender::Response resp;
@@ -259,7 +260,7 @@ void send_email(String receiver,String subject,String message_) {
     message.subject = subject;
     message.message = message_;
 
-    EMailSender::Response resp = emailSend.send("oussama4123silem11@gmail.com", message);
+    EMailSender::Response resp = emailSend.send(receiver, message);
     Serial.println("Sending status: ");
 
     Serial.println(resp.status);
@@ -323,7 +324,11 @@ void synchronize_device(){
   Serial.println(response);
   if( statusCode==200){
     if(response != ""){
-      Serial1.print(response);
+      Serial1.print(response.substring(0, 10));
+      receiver = response.substring(11);
+    }else{ // case no owner , default receiver
+      Serial1.print("<00000000>");
+      receiver = "oussama4123silem11@gmail.com";
     }
   }
 }

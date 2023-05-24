@@ -11,7 +11,7 @@ void setup() {
 void loop() {
   Serial.println("----------------------------------");
   Serial.println("Sending events: ");
-  Serial1.write("1");
+  Serial1.write("2");
   char str[2];
   char badge[8];
   if(Serial1.available()>0){
