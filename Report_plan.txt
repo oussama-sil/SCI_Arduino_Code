@@ -1,0 +1,28 @@
+Introduction (Oussama)
+Presentation of the Solution (Djad)
+	Presentation of the Mailbox 
+	Features of the mailbox
+	General Architecture of the solution
+	Activity diagrams of the solution  
+		Door openning 
+		Mail Reception
+Implementation of the solution 
+	Arduino 02 (Controller): (Djad)
+		Tasks
+		Schema 
+ 		Presentation of the components 
+		Software explanation 
+	Arduino 01 (Mailing ) : (Oussama)
+		Tasks
+		Schema 
+		Software explanation 		
+	Web application (Oussama)
+		API :
+			Database
+			Backend 
+		User interface :
+			Frontend 
+Some pictures of the final product 
+Perspective of the project 
+Annexe : Code 
+Conclusion (oussama)

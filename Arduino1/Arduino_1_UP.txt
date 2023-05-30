@@ -26,7 +26,8 @@
   }
 
   //* Measuring the distance for door state
-  int readUltrasonicDistance(int SIG_PIN_Value){
+  int readUltrasonicDistance(int SIG_PIN_Value)
+  {
     int dist_cm;
     pinMode(SIG_PIN_Value, OUTPUT);  // Clear the trigger
     digitalWrite(SIG_PIN_Value, LOW);
@@ -62,11 +63,8 @@
   int DOOR_STATE=0; //0 if closed 1 if opened
   int Allowed_Open=0;
   int nb_mail=0;
-  unsigned long TIME_LAST_EMAIL;
+  unsigned long CURRENT_TIME;
   int i;
-    int mail_check_dist;
-    //Closing doorc
-    int door_distance=0;
   
 
   void setup() 
@@ -80,14 +78,14 @@
     // Init SPI bus
     SPI.begin(); 
     LOCK_SERVO.attach(LOCK_PIN);
-    //int door_distance = readUltrasonicDistance(SIG_PIN);
-    //if(door_distance>DOOR_DISTANCE ){
+    int door_distance = readUltrasonicDistance(SIG_PIN);
+    if(door_distance>DOOR_DISTANCE ){
       LOCK_SERVO.write(OP_ANG);
       DOOR_STATE=1;
-   // }
-   /** else{
+    }
+    else{
       LOCK_SERVO.write(CL_ANG);
-    }*/
+    }
     // Init MFRC522 
     rfid.PCD_Init();          
   }
@@ -95,36 +93,32 @@
   void loop() 
   {
     Serial.println("---------------------------------------------------------------");  
-    Serial.print("NB mails : ");
-    Serial.println(nb_mail);
+    CURRENT_TIME=millis();
+    int mail_check_dist;
+    //Closing doorc
+    int door_distance;
     if(!DOOR_STATE)
     {
-      Serial.println("Door closed : ");
       // Mesurer la distance pour le ultrason qui détecte les nouveaux mail (car on peut reçus nouveaux juste si la la prote est fermé)
       mail_check_dist = measure_distance();
-      Serial.print(mail_check_dist);
-      Serial.print(" ");
-      if(mail_check_dist<=MAIL_DISTANCE && millis()-TIME_LAST_EMAIL>10000){
-          TIME_LAST_EMAIL = millis();
-          nb_mail++;
-        Serial.println(" ---> Sending email");
+      if(mail_check_dist<=MAIL_DISTANCE){
+        nb_mail++;
+        Serial.println(" Yes, Sending email");
         Serial1.write(String(nb_mail).c_str());
-      }else{
-        Serial.println(" ---> No mail");
       }
     }
     else
     {
       door_distance = readUltrasonicDistance(SIG_PIN);
-      Serial.println(" Measured distance : "+ String(door_distance));
     }
-    Serial.println("Door mechanism : Door current_state : "+ String(DOOR_STATE));
+    Serial.println(" Measured distance : "+ String(door_distance));
+    Serial.print("Door mechanism : Door current_state : "+ String(DOOR_STATE)+"----->");
     Serial.print("Testing if the box is damaged : ");
     if(!DOOR_STATE && door_distance>DOOR_DISTANCE){
       Serial.println(" Yes, Sending email");
-      Serial1.write("A");
+      Serial1.write("D");
       tone(BUZZER_PIN, 5000); // allume le buzzer actif arduino
-      delay(1000);
+      delay(5000);
       noTone(BUZZER_PIN);  // désactiver le buzzer actif arduino
     }else{
       Serial.println(" Safe");
@@ -149,7 +143,7 @@
       }
       Serial.println("The allowed RFID to open the Mailbox has been updated successfully. Now you can open it using the RFID :"+String(UID));
     }    
-    //delay(300);
+    delay(300);
     Serial.println("Testing if there is a badge");
     // Initialisé la boucle si aucun badge n'est présent 
     if ( !rfid.PICC_IsNewCardPresent())
@@ -173,11 +167,10 @@
       {
         Serial.println("Valid BadgeID => Openning the door");
         LOCK_SERVO.write(OP_ANG);
-        nb_mail = 0;
         Allowed_Open=1;
         DOOR_STATE=1;
         Serial1.write("0");
-        delay(2000);      
+        delay(1000);      
       }
       else{
         if(DOOR_STATE && door_distance<=DOOR_DISTANCE ){
