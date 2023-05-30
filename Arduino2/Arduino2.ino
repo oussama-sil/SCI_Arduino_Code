@@ -32,7 +32,7 @@ EMailSender::EMailMessage door_openning_message;//2
 EMailSender::EMailMessage damaged_mailbox_message;//3
 
 //* API Informations
-char serverAddress[] = "192.168.217.193";  // API IP address
+char serverAddress[] = "192.168.87.193";  // API IP address
 int port = 5000; // PORT 
 unsigned long SYN_LAST = 0;
 

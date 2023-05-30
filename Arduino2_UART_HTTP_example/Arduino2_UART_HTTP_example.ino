@@ -5,7 +5,7 @@ char ssid[] = "Ico";
 char pass[] = "oussouss";
 
 // API IP address and PORT
-char serverAddress[] = "192.168.217.193";  // server address
+char serverAddress[] = "192.168.87.193";  // server address
 int port = 5000;
 
 //Number of mails in the box
