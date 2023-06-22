@@ -2,6 +2,7 @@ Introduction (Oussama)
 Presentation of the Solution (Djad)
 	Presentation of the Mailbox 
 	Features of the mailbox
+	Components
 	General Architecture of the solution
 	Activity diagrams of the solution  
 		Door openning 
@@ -23,6 +24,7 @@ Implementation of the solution
 		User interface :
 			Frontend 
 Some pictures of the final product 
-Perspective of the project 
 Annexe : Code 
+
 Conclusion (oussama)
+Perspective of the project 

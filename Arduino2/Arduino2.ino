@@ -114,7 +114,7 @@ void setup()
     //*Connecting to the wifi
     digitalWrite(LED_WIFI, LOW); 
     connection_state = WiFiConnect(ssid, password);
-    if(!connection_state)  // if not connected to WIFI
+    if(!connection_state)  // if not connec Wted to WIFI
         Awaits();          // constantly trying to connect
 
     //* Emptieng the Serial1 buffer   
@@ -172,7 +172,7 @@ void loop()
       resp = emailSend.send(receiver, damaged_mailbox_message);
     if(opt=='0')
       resp = emailSend.send(receiver, door_openning_message);
-    if(opt=='1' || opt=='2' || opt=='3' || opt=='4'){
+    if(opt=='1' || opt=='2' || opt=='3' || opt=='4'|| opt=='5'|| opt=='6'){
       mail_reception_message.message = "You received a new mail, you mailbox contains "+String(opt)+" mail(s)";
       resp = emailSend.send(receiver, mail_reception_message);
     }
