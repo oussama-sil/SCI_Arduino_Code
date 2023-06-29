@@ -1,11 +1,6 @@
 #include <EMailSender.h>
 #include <ArduinoHttpClient.h>
 
-//* LEDs
-#define GREEN 0  // WIFI CONNECTED 
-#define RED 1    // WIFI NOT CONNECTED
-#define INFO 2   // SENDING EMAIL
-//* Pins of the Ultrasonic sensor 
 
 #define MAX_DISTANCE 20
 #define LED_WIFI 6
@@ -17,21 +12,20 @@ uint8_t connection_state = 0;
 uint16_t reconnect_interval = 10000;
 
 //* Access point credentials 
-char ssid[] = "Ico";
-char password[] = "oussouss";
+char ssid[] = "******";
+char password[] = "*******";
 unsigned long CONNECTING_LAST = 0;
   
 //* EmailSender informations 
-// Sender is always oussama4123silem11@gmail.com (to modify)
-EMailSender emailSend("oussama4123silem11@gmail.com", "seniphfgkzibmpje","Intelligent Mailbox");
-String receiver = "oussama4123silem11@gmail.com";
+EMailSender emailSend("account@gmail.com", "sksksks","Intelligent Mailbox");
+String receiver = "account@gmail.com";
 EMailSender::Response resp;
 EMailSender::EMailMessage mail_reception_message;//1
 EMailSender::EMailMessage door_openning_message;//2
 EMailSender::EMailMessage damaged_mailbox_message;//3
 
 //* API Informations
-char serverAddress[] = "192.168.87.193";  // API IP address
+char serverAddress[] = "************";  // API IP address
 int port = 5000; // PORT 
 unsigned long SYN_LAST = 0;
 
@@ -278,27 +272,7 @@ void synchronize_device(){
       receiver = response.substring(11);
     }else{ // case no owner , default receiver
       Serial1.print("<00000000>");
-      receiver = "oussama4123silem11@gmail.com";
+      receiver = "account@gmail.com";
     }
   }
 }
-
-
-
-
-
-
-void send_email(String receiver,String subject,String message_) {
-    EMailSender::EMailMessage message;
-    message.subject = subject;
-    message.message = message_;
-
-    EMailSender::Response resp = emailSend.send(receiver, message);
-    Serial.println("Sending status: ");
-
-    Serial.println(resp.status);
-    Serial.println(resp.code);
-    Serial.println(resp.desc);
-
-}
-

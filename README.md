@@ -1,14 +1,14 @@
 # SCI_Arduino_Code
 
+**Project** : Inteligent mailbox
 
 **Arduino 01** :
 
-* Manage the door Openning/Closing mechanism
-* 
+* Manage the door openning mechanism
+* Counting the number of mails in the box
 
 **Arduino 02** :
 
-* Counting the number of mails in the box
 * Notify the owner of the mailbox when any of the following events occurs :
   * Openning of the mailbox
   * Reception of a new mail

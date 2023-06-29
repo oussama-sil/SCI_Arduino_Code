@@ -2,6 +2,7 @@
   #include <MFRC522.h> // RFID
   #include <Servo.h>
 
+  // Pins
   #define SDA_PIN 11
   #define RST_PIN 5
   #define LOCK_PIN 1
@@ -25,7 +26,7 @@
       return 0; 
   }
 
-  //* Measuring the distance for door state
+  //* Measuring the distance for the door's state
   int readUltrasonicDistance(int SIG_PIN_Value){
     int dist_cm;
     pinMode(SIG_PIN_Value, OUTPUT);  // Clear the trigger
@@ -73,7 +74,7 @@
   { 
     // Init RS232
     Serial.begin(9600);
-    Serial1.begin(9600);    // pinMode(LED_PIN, OUTPUT);
+    Serial1.begin(9600);    
     pinMode(BUZZER_PIN, OUTPUT);
     pinMode(TRIG, OUTPUT); // Sets the trigPin as an Output
     pinMode(ECHO, INPUT); // Sets the echoPin as an Input
@@ -84,10 +85,7 @@
     //if(door_distance>DOOR_DISTANCE ){
       LOCK_SERVO.write(OP_ANG);
       DOOR_STATE=1;
-   // }
-   /** else{
-      LOCK_SERVO.write(CL_ANG);
-    }*/
+
     // Init MFRC522 
     rfid.PCD_Init();          
   }
@@ -108,7 +106,7 @@
           TIME_LAST_EMAIL = millis();
           nb_mail++;
         Serial.println(" ---> Sending email");
-        Serial1.write(String(nb_mail).c_str());
+        Serial1.write(String(nb_mail).c_str()); //Sending a message to the second controller 
       }else{
         Serial.println(" ---> No mail");
       }
@@ -185,14 +183,12 @@
           if(Allowed_Open){
             Allowed_Open=0;
           }
-          // digitalWrite(LED_PIN,LOW);
           DOOR_STATE=0;
           Serial.println("Valid BadgeID => Closing the door");
         }
         else{
           Serial.println("Valid BadgeID => Door already openned");
         }
-        // Serial.println("Prote déja ouverte");
       }
     }
     else{
