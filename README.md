@@ -4,15 +4,15 @@
 
 **Arduino 01** :
 
-* Manage the door openning mechanism
-* Counting the number of mails in the box
+* Manage the door opening mechanism
+* Count the number of mails in the box
 
 **Arduino 02** :
 
-* Notify the owner of the mailbox when any of the following events occurs :
-  * Openning of the mailbox
+* Notify the owner of the mailbox when any of the following events occurs:
+  * Opening of the mailbox
   * Reception of a new mail
-  * Mailbox damaged (openned without authorisation)
-* Communicate with API :
-  * Send all the events to the API to be stored ont he database
-  * Retrieve the badgeID of the owner of the mailbox
+  * Mailbox damaged (opened without authorization)
+* Communicate with the API :
+  * Send all the events to the API to be stored in the database
+  * Retrieve the badge ID of the owner of the mailbox
